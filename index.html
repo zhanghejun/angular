@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" ng-app="remder">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<link rel="stylesheet" href="css/index.css" />
+	<script src="js/jquery.js"></script>
+	<script src="js/angular.js"></script>
+	<script src="js/index.js"></script>
+</head>
+<body ng-controller="mainCtil" ng-click="showcard=false">
+	<div class="remder">
+		<div class="lists">
+			<div class="header">
+				<div class="logo"></div>
+				<div class="title">提醒事项</div>
+				<div class="jia" ng-click="add()"></div>
+			</div>
+			<div class="biaoti">
+				<div class="biao"></div>
+				<div class="title">已计划</div>
+			</div>
+			<ul class="lists-inner">
+				<li ng-repeat="v in lists" ng-click="setcurrent($index)" ng-class="{active:v.listname===currentlist.listname}">
+					<span ng-class="v.threm"></span>
+					<input type="text" ng-model="v.listname">
+				</li>
+		    </ul>
+		</div>
+		<div class="content" ng-class="currentlist.threm" ng-init="showcard=false">
+			<div class="search">
+				<span></span>
+				<div class="sou">搜索所有提醒</div>
+			</div>
+			<div class="bao">
+			<div class="content-inner">
+				<div class="title">
+					<span ng-bind="currentlist.listname"></span>
+					<div class="xuanxiang" ng-click="showcard=!showcard;cen($event)" >选项</div>
+				</div>
+				<div class="xiang">
+					<span></span>
+					已完成项目
+				</div>
+				<ul class="inner">
+					<li ng-repeat="v in currentlist.todos">
+						<div class="cil" ng-class="currentlist.threm"></div>
+						<input type="text" ng-model='v.name'>
+					</li>
+					<li class="li" ng-class="currentlist.threm">
+						<div class="circle"></div>
+						<input type="text">
+					</li>
+				</ul>
+				<ul>
+					<li class="xin" ng-click="plus()">新条目</li>
+				</ul>
+			</div>
+			</div>
+			
+			<div class="box" ng-show="showcard" ng-click="cen($event)">
+			<div class="inner">
+				<input type="text" ng-model="currentlist.listname" ng-class="currentlist.threm">
+				<p>列表颜色</p>
+				<ul class="color">
+					<li ng-class="{green:currentlist.threm==='green'}"><span class="green" ng-click="currentlist.threm='green'"></span></li>
+					<li ng-class="{yellow:currentlist.threm==='yellow'}"><span class="yellow" ng-click="currentlist.threm='yellow'"></span></li>
+					<li ng-class="{blue:currentlist.threm==='blue'}"><span class="blue" ng-click="currentlist.threm='blue'"></span></li>
+					<li ng-class="{org:currentlist.threm==='org'}"><span class="org" ng-click="currentlist.threm='org'"></span></li>
+					<li ng-class="{pink:currentlist.threm==='pink'}"><span class="pink" ng-click="currentlist.threm='pink'"></span></li>
+					<li ng-class="{tuhuang:currentlist.threm==='tuhuang'}"><span class="tuhuang" ng-click="currentlist.threm='tuhuang'"></span></li>
+					<li ng-class="{red:currentlist.threm==='red'}"><span class="red" ng-click="currentlist.threm='red'"></span></li>
+				</ul>
+				<div class="del" ng-click="showcard=false;del(currentlist.id)">删除</div>
+				<div class="xiao">
+				<div class="quxiao" ng-click="showcard=false">取消</div>
+				<div class="wancheng" ng-click="showcard=false">完成</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		
+	</div>
+</body>
+</html>
